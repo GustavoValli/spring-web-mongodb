@@ -1,6 +1,9 @@
 package com.valligustavo.springwebmongodb.services;
 
 import com.valligustavo.springwebmongodb.domain.adoptioncenter.AdoptionCenter;
+import com.valligustavo.springwebmongodb.domain.adoptioncenter.exceptions.AdoptionCenterNotFoundException;
+import com.valligustavo.springwebmongodb.dto.adoptioncenter.AdoptionCenterIdDTO;
+import com.valligustavo.springwebmongodb.dto.adoptioncenter.AdoptionCenterDTO;
 import com.valligustavo.springwebmongodb.repositories.AdoptionCenterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,4 +18,22 @@ public class AdoptionCenterService {
     public List<AdoptionCenter> findAll() {
         return this.adoptionCenterRepository.findAll();
     }
+
+    public AdoptionCenter findById(String id) {
+        return this.adoptionCenterRepository.findById(id).orElseThrow(
+                () -> new AdoptionCenterNotFoundException("Can't find the adoption center with ID: " + id)
+        );
+    }
+
+    public AdoptionCenterIdDTO createAdoptionCenter(AdoptionCenterDTO request) {
+        AdoptionCenter newAdoptionCenter = new AdoptionCenter();
+        newAdoptionCenter.setName(request.name());
+        newAdoptionCenter.setLocation(request.location());
+        newAdoptionCenter.setNumberOfPets(request.numberOfPets());
+
+        this.adoptionCenterRepository.save(newAdoptionCenter);
+
+        return new AdoptionCenterIdDTO(newAdoptionCenter.getId());
+    }
 }
+
