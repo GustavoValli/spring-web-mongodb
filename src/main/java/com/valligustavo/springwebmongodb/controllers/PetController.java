@@ -1,10 +1,12 @@
 package com.valligustavo.springwebmongodb.controllers;
 
 import com.valligustavo.springwebmongodb.domain.pet.Pet;
+import com.valligustavo.springwebmongodb.dto.pet.PetDTO;
 import com.valligustavo.springwebmongodb.services.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +22,12 @@ public class PetController {
     public ResponseEntity<List<Pet>> findAll() {
         List<Pet> petList = this.petService.findAll();
         return ResponseEntity.ok().body(petList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PetDTO> findById(@PathVariable String id) {
+        Pet pet = this.petService.findById(id);
+        PetDTO petDTO = new PetDTO(pet.getName(), pet.getSize(), pet.getAge(), pet.getAdoptionCenter());
+        return ResponseEntity.ok().body(petDTO);
     }
 }
