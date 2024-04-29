@@ -1,5 +1,6 @@
 package com.valligustavo.springwebmongodb.domain.pet;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.valligustavo.springwebmongodb.domain.adoptioncenter.AdoptionCenter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +21,6 @@ public class Pet {
     private String size;
     private Integer age;
 
+    @JsonIgnore
     private AdoptionCenter adoptionCenter;
 }
