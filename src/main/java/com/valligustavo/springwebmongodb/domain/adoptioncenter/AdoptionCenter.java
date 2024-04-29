@@ -1,5 +1,6 @@
 package com.valligustavo.springwebmongodb.domain.adoptioncenter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.valligustavo.springwebmongodb.domain.pet.Pet;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -20,8 +21,8 @@ public class AdoptionCenter {
     private String id;
     private String name;
     private String location;
-    private Integer numberOfPets;
 
+    @JsonIgnore
     @DBRef(lazy = true)
     private List<Pet> pets = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package com.valligustavo.springwebmongodb.services;
 
+import com.valligustavo.springwebmongodb.domain.adoptioncenter.AdoptionCenter;
 import com.valligustavo.springwebmongodb.domain.pet.Pet;
 import com.valligustavo.springwebmongodb.domain.pet.exceptions.PetNotFoundException;
 import com.valligustavo.springwebmongodb.dto.pet.PetDTO;
@@ -30,10 +31,16 @@ public class PetService {
         newPet.setName(request.name());
         newPet.setSize(request.size());
         newPet.setAge(request.age());
-        newPet.setAdoptionCenter(request.adoptionCenter());
 
         this.petRepository.save(newPet);
 
         return new PetIdDTO(newPet.getId());
+    }
+
+    public Pet registerPet(PetIdDTO petId, AdoptionCenter adoptionCenter) {
+        Pet pet = this.findById(petId.id());
+        pet.setAdoptionCenter(adoptionCenter);
+        this.petRepository.save(pet);
+        return pet;
     }
 }
