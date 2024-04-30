@@ -48,4 +48,10 @@ public class AdoptionCenterController {
 
         return ResponseEntity.created(uri).body(petIdDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteAdoptionCenter(@PathVariable String id) {
+        this.adoptionCenterService.deleteAdoptionCenter(id);
+        return ResponseEntity.ok().build();
+    }
 }

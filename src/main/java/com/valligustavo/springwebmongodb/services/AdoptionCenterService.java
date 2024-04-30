@@ -47,4 +47,8 @@ public class AdoptionCenterService {
 
         return new PetIdDTO(pet.getId());
     }
+
+    public void deleteAdoptionCenter(String id) {
+        this.adoptionCenterRepository.deleteById(id);
+    }
 }

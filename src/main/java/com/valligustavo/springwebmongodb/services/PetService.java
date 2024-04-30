@@ -43,4 +43,8 @@ public class PetService {
         this.petRepository.save(pet);
         return pet;
     }
+
+    public void deletePet(String id) {
+        this.petRepository.deleteById(id);
+    }
 }
