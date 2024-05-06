@@ -51,4 +51,12 @@ public class AdoptionCenterService {
     public void deleteAdoptionCenter(String id) {
         this.adoptionCenterRepository.deleteById(id);
     }
+
+    public AdoptionCenter search(String name, String location) {
+        return this.adoptionCenterRepository.search(name, location);
+    }
+
+    public AdoptionCenter findByName(String name) {
+        return this.adoptionCenterRepository.findByName(name);
+    }
 }

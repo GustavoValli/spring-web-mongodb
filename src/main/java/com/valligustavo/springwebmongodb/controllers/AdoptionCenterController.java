@@ -54,4 +54,22 @@ public class AdoptionCenterController {
         this.adoptionCenterService.deleteAdoptionCenter(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<AdoptionCenter> search(
+            @RequestParam(value = "name", defaultValue = "") String name,
+            @RequestParam(value = "location", defaultValue = "") String location
+    ) {
+        AdoptionCenter adoptionCenter = this.adoptionCenterService.search(name, location);
+        return ResponseEntity.ok().body(adoptionCenter);
+    }
+
+    @GetMapping("/findByName")
+    public ResponseEntity<AdoptionCenter> findByName(
+            @RequestParam(value = "name", defaultValue = "") String name
+    ) {
+        AdoptionCenter adoptionCenter = this.adoptionCenterService.findByName(name);
+        return ResponseEntity.ok().body(adoptionCenter);
+    }
+    
 }
