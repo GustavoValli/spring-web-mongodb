@@ -44,4 +44,22 @@ public class PetController {
         this.petService.deletePet(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<Pet> search(
+            @RequestParam(value = "name", defaultValue = "") String name,
+            @RequestParam(value = "size", defaultValue = "") String size,
+            @RequestParam(value = "age", defaultValue = "") Integer age
+    ) {
+        Pet pet = this.petService.search(name, size, age);
+        return ResponseEntity.ok().body(pet);
+    }
+
+    @GetMapping("/findByName")
+    public ResponseEntity<Pet> findByName(
+            @RequestParam(value = "name", defaultValue = "") String name
+    ) {
+        Pet pet = this.petService.findByName(name);
+        return ResponseEntity.ok().body(pet);
+    }
 }

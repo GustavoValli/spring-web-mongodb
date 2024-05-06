@@ -47,4 +47,12 @@ public class PetService {
     public void deletePet(String id) {
         this.petRepository.deleteById(id);
     }
+
+    public Pet search(String name, String size, Integer age) {
+        return this.petRepository.search(name, size, age);
+    }
+
+    public Pet findByName(String name) {
+        return this.petRepository.findByName(name);
+    }
 }
